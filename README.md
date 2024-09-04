@@ -115,7 +115,9 @@ criteria = {
     "Faster Scan": [9, 6, 7, 8, 8],  # Modify these based on your dataset
     "Cost per Print": [6, 5, 8, 9, 7],
     "Colour Quality": [8, 7, 9, 7, 6],
-    "Speed": [7, 8, 7, 6, 9]
+    "Speed": [7, 8, 7, 6, 9],
+    "Purchasing Cost": [7, 9, 6, 5, 8],  # Purchasing cost criterion
+    "Prints Colour": [9, 6, 8, 7, 8]  # New criterion: Adjust these scores as needed
 }
 
 # Convert criteria to DataFrame
@@ -128,12 +130,14 @@ criteria_scaled = scaler.fit_transform(criteria_df)
 # Convert back to DataFrame
 criteria_scaled_df = pd.DataFrame(criteria_scaled, columns=criteria_df.columns)
 
-# Assign weights to each criterion
+# Assign equal weights to all criteria (including the new "Prints Colour")
 weights = {
-    "Faster Scan": 0.25,
-    "Cost per Print": 0.25,
-    "Colour Quality": 0.25,
-    "Speed": 0.25
+    "Faster Scan": 0.1667,
+    "Cost per Print": 0.1667,
+    "Colour Quality": 0.1667,
+    "Speed": 0.1667,
+    "Purchasing Cost": 0.1667,
+    "Prints Colour": 0.1667  # New criterion with equal weight
 }
 
 # Calculate the weighted score for each printer
@@ -173,3 +177,4 @@ print(printers_df[['Printer Model', 'Weighted Score', 'Rank']])
 
 ## License
 This project is licensed under the MIT License.
+
